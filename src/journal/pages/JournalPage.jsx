@@ -7,7 +7,10 @@ export const JournalPage = () => {
 
 <>
 <JournalLayout>
-<Typography >Kimberly Armijo had ....
+<Typography >
+  
+Kimberly Armijo had immediate radicular nerve symptoms after s
+
 
 {/* Nothing selected  */}
 {/* Note view  */}
