@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material'
 import { JournalLayout } from '../layout/JournalLayout'
+import { NothingSelectedView } from '../views'
 
 
 export const JournalPage = () => {
@@ -9,10 +10,8 @@ export const JournalPage = () => {
 <JournalLayout>
 <Typography >
   
-Kimberly Armijo had immediate radicular nerve symptoms after s
 
-
-{/* Nothing selected  */}
+< NothingSelectedView />
 {/* Note view  */}
 
 </Typography>
