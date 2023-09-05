@@ -1,22 +1,52 @@
 
 import { Google } from '@mui/icons-material'
 import { Button, Grid, Link, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { AuthLayouth } from '../layout/AuthLayouth'
+import { useForm } from '../../hooks'
+import { useDispatch, useSelector } from 'react-redux'
+import { checkingAuthentication, startGoogleSignIn } from '../../store/auth'
 
 export const LoginPage = () => {
+
+  const  dispatch= useDispatch();
+
+  
+  
+
+  
+  const {email,password,onInputChange,formState} = useForm({
+    email: 'andres@gmail.com',
+    password:'123'
+  })
+
+  const onSubmit =(event)=>{
+    event.PreventDefault()
+    console.log({email,password});
+    
+  }
+
+  const onGoogleSignIn= ( ) =>{
+    console.log('onGoogleSignIn');
+    dispatch(startGoogleSignIn())
+    
+  }
+  
   return (
     
     <AuthLayouth title='Login'>
 
-            <form >
+            <form on onSubmit={onSubmit} >
                     <Grid container>
                           <Grid item xs={12} sx={{mt:2}} >
                               <TextField 
                               label="correo"
                                  type="email"
                                   placeholder='correo@gmail.com'
+                                  name='email'
+                                  onInputChange={onInputChange}
+                                  value={email}
                                   fullWidth
                                     />
                           </Grid>
@@ -26,17 +56,27 @@ export const LoginPage = () => {
                                  type="password"
                                   placeholder='Contraseña'
                                   fullWidth
+                                  name='password'
+                                  onInputChange={onInputChange}
+                                  value={password}
                                     />
                           </Grid>
                                 <Grid container spacing={2} sx={{mb:2, mt:1}}>
                                   <Grid item xs={12} sm={6}>
-                                      <Button variant='contained' fullWidth>
+                                      <Button 
+                                      type='submit' 
+                                      variant='contained'
+                                      onClick={() => dispatch( checkingAuthentication())}
+                                      fullWidth>
                                         Login
                                       </Button>
                                     </Grid>
 
                                   <Grid item xs={12} sm={6}>
-                                      <Button variant='contained' fullWidth>
+                                      <Button 
+                                      variant='contained' 
+                                      fullWidth
+                                      onClick={ dispatch( startGoogleSignIn())}>
                                       <Google/>
                                        <Typography sx={{ml:1}}>  Google   </Typography> 
                                       </Button>
