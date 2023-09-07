@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { AuthLayouth } from '../layout/AuthLayouth'
 import { useForm } from '../../hooks'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { checkingAuthentication, startGoogleSignIn } from '../../store/auth'
 
 export const LoginPage = () => {
@@ -13,17 +13,15 @@ export const LoginPage = () => {
   const  dispatch= useDispatch();
 
   
-  
-
-  
-  const {email,password,onInputChange,formState} = useForm({
+  const {email,password,onInputChange} = useForm({
     email: 'andres@gmail.com',
     password:'123'
   })
 
   const onSubmit =(event)=>{
-    event.PreventDefault()
+    event.preventDefault()
     console.log({email,password});
+    dispatch( checkingAuthentication())
     
   }
 
@@ -37,7 +35,7 @@ export const LoginPage = () => {
     
     <AuthLayouth title='Login'>
 
-            <form on onSubmit={onSubmit} >
+            <form  onSubmit={onSubmit} >
                     <Grid container>
                           <Grid item xs={12} sx={{mt:2}} >
                               <TextField 
@@ -45,7 +43,7 @@ export const LoginPage = () => {
                                  type="email"
                                   placeholder='correo@gmail.com'
                                   name='email'
-                                  onInputChange={onInputChange}
+                                  onChange={onInputChange}
                                   value={email}
                                   fullWidth
                                     />
@@ -57,7 +55,7 @@ export const LoginPage = () => {
                                   placeholder='Contraseña'
                                   fullWidth
                                   name='password'
-                                  onInputChange={onInputChange}
+                                  onChange={onInputChange}
                                   value={password}
                                     />
                           </Grid>
@@ -66,8 +64,8 @@ export const LoginPage = () => {
                                       <Button 
                                       type='submit' 
                                       variant='contained'
-                                      onClick={() => dispatch( checkingAuthentication())}
-                                      fullWidth>
+                                      fullWidth
+                                      onClick={onSubmit}>
                                         Login
                                       </Button>
                                     </Grid>
@@ -76,7 +74,7 @@ export const LoginPage = () => {
                                       <Button 
                                       variant='contained' 
                                       fullWidth
-                                      onClick={ dispatch( startGoogleSignIn())}>
+                                      onClick={ onGoogleSignIn}>
                                       <Google/>
                                        <Typography sx={{ml:1}}>  Google   </Typography> 
                                       </Button>
@@ -84,7 +82,7 @@ export const LoginPage = () => {
                                   
                               </Grid>
 
-                          <Grid container='row' justifyContent='end'>
+                          <Grid container direction='row' justifyContent='end'>
                            <Link component={RouterLink} color='inherit' to='/auth/register'>
                             Crear una cuenta 
                            
