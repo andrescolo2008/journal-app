@@ -6,7 +6,7 @@ import { AuthLayouth } from '../layout/AuthLayouth'
 import { useForm } from '../../hooks'
 
         const formData={
-          displayName:'luis',
+          displayName:'andres',
           email: 'andres@gmail.com',
           password:'123'
         }
@@ -24,6 +24,9 @@ export const RegisterPage = () => {
     formState,displayName, email,password,onInputChange,
     formStateValid,displayNameValid,emailValid,passwordValid
   } = useForm(formData,formValidations)
+
+  console.log(displayNameValid);
+  
 
  const onSubmit = (event )=>{
   event.preventDefault()
