@@ -11,9 +11,19 @@ import { useForm } from '../../hooks'
           password:'123'
         }
 
+        const formValidations = {
+          email:[ (value)=>value.includes('@'),' el correo debe contener un @' ],
+          password:[ (value)=>value.length >=6,' el password debe contener más de 6 caracteres (números,letras y/0 símbolos)' ],
+          displayName:[ (value)=>value.length >2,' el nombre es requerido ' ],
+          
+        }
+
 export const RegisterPage = () => {
 
-  const {displayName, email,password,onInputChange,formState} = useForm(formData)
+  const {
+    formState,displayName, email,password,onInputChange,
+    formStateValid,displayNameValid,emailValid,passwordValid
+  } = useForm(formData,formValidations)
 
  const onSubmit = (event )=>{
   event.preventDefault()
@@ -37,6 +47,8 @@ export const RegisterPage = () => {
                                   name='displayName'
                                   value={displayName}
                                   onChange={onInputChange}
+                                  error={!displayNameValid}
+                                  helperText={displayNameValid ?'elnombre es obligaroio ':''}
                                     />
                                     
                           </Grid>
