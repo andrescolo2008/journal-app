@@ -1,16 +1,16 @@
 
 import { Google } from '@mui/icons-material'
-import { Button, Grid, Link, TextField, Typography } from '@mui/material'
+import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material'
 import React, { useEffect, useMemo } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { AuthLayouth } from '../layout/AuthLayouth'
 import { useForm } from '../../hooks'
 import { useDispatch, useSelector } from 'react-redux'
-import { checkingAuthentication, startGoogleSignIn } from '../../store/auth'
+import { checkingAuthentication, startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth'
 
 export const LoginPage = () => {
 
-  const {status} = useSelector(state =>state.auth)
+  const {status,errorMessage} = useSelector(state =>state.auth)
   const isAuthenticating = useMemo(()=> status === 'checking',[status])
 
   const  dispatch= useDispatch();
@@ -23,8 +23,9 @@ export const LoginPage = () => {
 
   const onSubmit =(event)=>{
     event.preventDefault()
-    console.log({email,password});
-    dispatch( checkingAuthentication())
+    // console.log({email,password});
+    // !No es esta la acción a despachar  
+    dispatch( startLoginWithEmailPassword({email,password}))
     
   }
 
@@ -62,8 +63,25 @@ export const LoginPage = () => {
                                   value={password}
                                     />
                           </Grid>
+                          <Grid  container
+                                  display={!!errorMessage?'':'none'}
+                                  sx={{mt:1,mb:2}}
+                          >    
+
+                          <Grid 
+                                  item
+                                  xs={12} 
+                                  >
+
+                                      <Alert severity='error'>{errorMessage}</Alert>
+                            </Grid>
+
+                           </Grid>
                                 <Grid container spacing={2} sx={{mb:2, mt:1}}>
                                   <Grid item xs={12} sm={6}>
+
+                                 
+
                                       <Button 
                                       disabled={isAuthenticating}
                                       type='submit' 
