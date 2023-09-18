@@ -17,8 +17,8 @@ export const LoginPage = () => {
 
   
   const {email,password,onInputChange} = useForm({
-    email: 'andres@gmail.com',
-    password:'123'
+    email: '',
+    password:''
   })
 
   const onSubmit =(event)=>{
