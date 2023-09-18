@@ -1,9 +1,6 @@
 import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { FirebaseAuth } from "./config";
 
- const googleProvider= new GoogleAuthProvider();
- googleProvider.setCustomParameters({    prompt: 'select_account'})// sirve para permitir seleccionar la cuenta de google cada vez que uno quiera volver a conectarse 
-
   export const signInWithGoogle = async ( ) =>{
 
     try{
@@ -73,4 +70,8 @@ console.log({email,password});
         
     }
 
+ }
+
+ export const logOutFirebase= async( ) =>{
+    return await FirebaseAuth.signOut()
  }
