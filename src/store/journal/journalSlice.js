@@ -1,9 +1,9 @@
- import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const journalSlice = createSlice({
 name:'journal',
  initialState: {
-isSaving: true,
+isSaving: false,
 messageSaved:'',
 notes:[],
 active:null,
@@ -17,15 +17,20 @@ active:null,
 },
 reducers: {
     addEmptyNote: (state,  action ) => {
- 
+      state.notes.push(action.payload)
+      state.isSaving= false
     },
 
     setActiveNote: (state,  action ) => {
- 
+        state.active=action.payload;
     },
 
-    setNotes: (state,  action ) => {
+    savingNewNNote: (state ) => {
+      state.isSaving= true
  
+    },
+    setNotes: (state,  action ) => {
+        state.notes= action.payload
     },
 
     setSavings: (state ) => {
@@ -46,6 +51,7 @@ reducers: {
 export const { 
     addEmptyNote,
     setActiveNote,
+    savingNewNNote,
     setNotes,
     setSavings,
     updateNote,
