@@ -1,5 +1,5 @@
 import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
-import { useDispatch, useSelector } from "react-redux"
+import {  useSelector } from "react-redux"
 import { SideBarItem } from "./SideBarItem"
 
 
@@ -8,7 +8,8 @@ export const Sidebar = ({drawerWidth = 240}) => {
 
     const {displayName} = useSelector(state =>state.auth)
     
-const {notes} = useSelector(state => state.journal);
+const {notes,} = useSelector(state => state.journal);
+
     return (
     <Box
     component='nav'
