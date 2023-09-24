@@ -1,8 +1,7 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { addEmptyNote, savingNewNNote, setActiveNote, setNotes } from "./";
+import { addEmptyNote, savingNewNNote, setActiveNote, setNotes, setSavings, updateNote } from "./";
 import { loadNotes } from "../../helpers/loadNotes";
-import { DockSharp } from "@mui/icons-material";
 
 export const startNewNote = ( ) =>{
     return async (dispatch,getState)=>{
@@ -52,3 +51,24 @@ return async ( dispatch,getState) =>{
 
 }
 
+
+export const startSaveNote= ( ) =>{
+    return async (dispatch,getState) =>{
+ 
+        dispatch(setSavings())
+
+        const {uid} = getState().auth;
+        const {active:note,title,body} = getState().journal;
+
+        const noteToFirestore= {...note}
+        delete noteToFirestore.id
+        
+        const docRef=doc (FirebaseDB,`${uid}/journal/notes/${note.id}`)
+
+        await setDoc(docRef,noteToFirestore,{merge:true})
+
+        
+
+        dispatch(updateNote(note))
+    }
+ }
