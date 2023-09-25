@@ -35,7 +35,7 @@ reducers: {
 
     setSavings: (state ) => {
       state.isSaving = true
-      //TODO mensje de error ...
+      state.messageSaved='';
     },
 
     updateNote: (state,  action ) => {// payload: note
@@ -48,7 +48,7 @@ reducers: {
           }
             return note
         })
-        //  Todo mostrar mensaje de actualziación
+        state.messageSaved=`${action.payload.title},actualizada correctamente`
     },
 
     deleteNoteById: (state,  action ) => {
