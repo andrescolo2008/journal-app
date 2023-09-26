@@ -15,12 +15,8 @@ try {
         method:'POST',
         body:formData
     })
-    console.log(resp);
     if(!resp.ok) throw newError('Nose pudo Subir la imagen')
     const cloudResp= await resp.json()
-
-console.log({cloudResp});
-
 
     return cloudResp.secure_url
     
