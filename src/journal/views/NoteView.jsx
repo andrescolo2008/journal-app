@@ -129,7 +129,7 @@ alignItems='center'
 
         </Grid>
 
-            <  ImageGallery/>
+            <  ImageGallery images={note.imageURL}/>
 
 </Grid>
     )
