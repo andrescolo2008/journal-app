@@ -56,6 +56,13 @@ reducers: {
       state.isSaving=false
     },
 
+    clearNotesLogout: (state ) => {
+      state.isSaving= false;
+      state.messageSaved= '';
+      state.notes=[];
+      state.active=null;
+    },
+
     deleteNoteById: (state,  action ) => {
  
     },
@@ -71,5 +78,6 @@ export const {
     setSavings,
     updateNote,
     setPhotosToActiveNote,
+    clearNotesLogout,
     deleteNoteById,
 } = journalSlice.actions;
