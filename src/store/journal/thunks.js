@@ -23,7 +23,7 @@ export const startNewNote = ( ) =>{
             title:'',
             body:'',
             date: new Date().getTime(),
-    imageURL:[],//hhttps://foto1.jpg
+            imageURL:[],//hhttps://foto1.jpg
 }
 const newDoc= doc(collection(FirebaseDB,`${uid}/journal/notes`) )
 // nueva forma de agregar documentos utilizando  firestore: 
